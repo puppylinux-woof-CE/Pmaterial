@@ -82,8 +82,8 @@ while read -r y;do
 done < $TMP0
 rm $TMP0
 # move to dir structure
-#pkg=`echo "${THEME}"|sed 's/ /_/'` # replace spaces
-pkg=${THEME,,}
+pkg=`echo "${THEME}"|sed 's/ /_/'` # replace spaces
+pkg=${pkg,,}_icons # lower case
 mkdir -p ${pkg}/usr/share/icons
 cp -arf "$THEME" ${pkg}/usr/share/icons
 # build rox desktop theme
