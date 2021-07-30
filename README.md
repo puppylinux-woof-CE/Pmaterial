@@ -1,7 +1,7 @@
 # PMaterial
 loose material design icon theme
 
-##Preview
+## Preview
 
 [<img src="PMaterial.png" style="width:100%">](PMaterial.png)
 
