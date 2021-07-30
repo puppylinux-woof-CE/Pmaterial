@@ -8,9 +8,13 @@ loose material design icon theme
 
 ## Build
 
-First type `export THEME="PMaterial"`.
+First edit (if using a distro other than puppy) then "source" the `build.conf` file then run `make`.
 
-Then type `make`.
+
+```sh
+. ./build.conf
+make
+```
 
 The icons will be built in `"PMaterial"` directory.
 
