@@ -28,10 +28,23 @@ jobs:
       # Runs a single command using the runners shell
       - name: Build
         run: ./puppy.sh
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          # Artifact name
-          name: PMaterial-tarball # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: ./pmaterial_icons.tar.xz
+          tag_name: v${{ github.run_number }}
+          release_name: v${{ github.run_number }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset   
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./pmaterial_icons.tar.xz
+          asset_name: pmaterial_icons.tar.xz
+          asset_content_type: application/x-xz-compressed-tar
